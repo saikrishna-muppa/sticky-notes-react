@@ -16,6 +16,7 @@ const AddNote = ({ handleAddNote }) => {
 			setNoteText('');
 		}
 	};
+	
 
 	return (
 		<div className='note new'>

@@ -31,11 +31,16 @@ function App() {
 		);
 	}, [notes]);
 
+//   const [items, setItems] = useState([notes]);
+  
 	const addNote = (text) => {
 		const date = new Date();
 		const newNote = {
 			id: nanoid(),
 			text: text,
+      // item:"",
+      // editItem:false,
+      fav: false,
 			date: date.toLocaleDateString(),
 		};
 		const newNotes = [...notes, newNote];
@@ -44,18 +49,41 @@ function App() {
 
 	const deleteNote = (id) => {
 		const newNotes = notes.filter((note) => note.id !== id);
+    // console.log(newNotes,"delete")
 		setNotes(newNotes);
 	};
+const updateNote=(id)=>{
+  //  const newNotes = notes.filter((note) => note.id !== id);
+  // const selectedItem=notes.find((item)=>item.id ===id)
+  // console.log(selectedItem,"selected")
+  //    setNotes({selectedItem})
+  // console.log({newNotes,text:selectedItem.text,id})
 
+	// setNotes({newNotes,text:selectedItem.text,id});
+}
+const makeFav = (id) => {
+  console.log("id ", id);
+
+
+  
+  const allItems = [...notes];
+  const itemIndex = allItems.findIndex((item) => item.id === id);
+  allItems[itemIndex].fav = !allItems[itemIndex].fav;
+  setNotes(allItems);
+  console.log("itemIndex", itemIndex);
+};
 
   return (
     <div className="container">
     <NotesList
-					notes={notes.filter((note) =>
-						note.text.toLowerCase()
-					)}
+    notes={notes}
+					// notes={notes.filter((note) =>
+					// 	note.text.toLowerCase()
+					// )}
 					handleAddNote={addNote}
 					handleDeleteNote={deleteNote}
+          handleUpdateNote={updateNote}
+          addToFavorites={makeFav}
 				/>
      
     </div>
