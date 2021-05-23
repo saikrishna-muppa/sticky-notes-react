@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import {GrEdit} from 'react-icons/gr';
 const AddNote = ({ handleAddNote }) => {
 	const [noteText, setNoteText] = useState('');
 	const characterLimit = 10000;
@@ -31,9 +31,11 @@ const AddNote = ({ handleAddNote }) => {
 				<small>
 					{characterLimit - noteText.length} Remaining
 				</small>
+				
 				<button className='save' onClick={handleSaveClick}>
 					Save
 				</button>
+
 			</div>
 		</div>
 	);

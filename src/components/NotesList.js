@@ -14,10 +14,12 @@ const NotesList = ({
 	 
 	return (
 		<div className='notes-list'>
-			{notes.map((note)=>{
+			{notes.map((note,idx)=>{
 				return (
 					<Note 
+					key={idx}
 					notes={notes}
+					fav={note.fav}
 					id={note.id}
 					text={note.text}
 					date={note.date}
@@ -25,6 +27,7 @@ const NotesList = ({
 					handleUpdateNote={handleUpdateNote}
 					addToFavorites={addToFavorites}
 					/>
+					
 				)
 			})}
 			<AddNote handleAddNote={handleAddNote} />
