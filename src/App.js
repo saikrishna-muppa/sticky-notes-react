@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import NotesList from "./components/NotesList";
-
+import { DragDropContext,Droppable  } from 'react-beautiful-dnd';
 function App() {
   const [notes, setNotes] = useState([
     {
@@ -57,16 +57,40 @@ function App() {
     console.log("itemIndex", itemIndex);
   };
 
+	// const [characters, updateCharacters] = useState(notes);
+// console.log(text,id,"notes")
+function handleOnDragEnd(result) {
+	
+	if (!result.destination) return;
+	const items = Array.from(notes);
+	const [reorderedItem] = items.splice(result.source.index, 1);
+	items.splice(result.destination.index, 0, reorderedItem);
+	console.log(result.destination,"destination")
+	setNotes(items);
+}
+
+
   return (
-    <div className="container">
-      <NotesList
-        notes={notes}
-        handleAddNote={addNote}
-        handleDeleteNote={deleteNote}
-        handleUpdateNote={updateNote}
-        addToFavorites={addToFavorites}
-      />
-    </div>
+    <DragDropContext  onDragEnd={handleOnDragEnd}>
+		<Droppable droppableId="contaner" >
+			{(provided)=>(
+				<div className="container" {...provided.droppableProps} ref={provided.innerRef}>
+        <NotesList
+          notes={notes}
+          handleAddNote={addNote}
+          handleDeleteNote={deleteNote}
+          handleUpdateNote={updateNote}
+          addToFavorites={addToFavorites}
+        />
+         {provided.placeholder}
+      </div>
+     
+			)}
+			
+		</Droppable>
+    
+		</DragDropContext>
+    
   );
 }
 

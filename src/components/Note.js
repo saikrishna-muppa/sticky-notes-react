@@ -5,23 +5,9 @@ import {GrEdit} from 'react-icons/gr';
 import {AiOutlineStar} from 'react-icons/ai'
 import {AiFillStar} from "react-icons/ai"
 const Note = ({ notes,id,fav,index, text, date, handleDeleteNote, handleUpdateNote, addToFavorites}) => {
-	const [characters, updateCharacters] = useState(notes);
-// console.log(text,id,"notes")
-function handleOnDragEnd(result) {
-	
-	if (!result.destination) return;
-	const items = Array.from(characters);
-	const [reorderedItem] = items.splice(result.source.index, 1);
-	items.splice(result.destination.index, 0, reorderedItem);
-	console.log(result.destination,"destination")
-	updateCharacters(items);
-}
-	return (
 
-<DragDropContext  onDragEnd={handleOnDragEnd}>
-		<Droppable droppableId={id}>
-			{(provided)=>(
-				<div className="note-header-container" {...provided.droppableProps} ref={provided.innerRef}>
+	return (
+<div className="note-header-container" >
 					<Draggable key={id}  draggableId={id} index={index} >
 				{(provided)=>(
 					<div className='note' ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}  >
@@ -45,12 +31,9 @@ function handleOnDragEnd(result) {
 				</div>
 				)}
 			</Draggable>
-			{provided.placeholder}
-			</div>
-			)}
 			
-		</Droppable>
-		</DragDropContext>
+			</div>
+
 	);
 };
 
