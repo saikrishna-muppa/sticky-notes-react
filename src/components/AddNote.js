@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {GrEdit} from 'react-icons/gr';
-const AddNote = ({ handleAddNote }) => {
+const AddNote = ({ handleAddNote,handleUpdateNote }) => {
 	const [noteText, setNoteText] = useState('');
 	const characterLimit = 10000;
 
@@ -17,7 +17,9 @@ const AddNote = ({ handleAddNote }) => {
 			setNoteText('');
 		}
 	};
-	
+const updatetextValue=(e)=>{
+	handleUpdateNote(e.target.value)
+}
 
 	return (
 		<div className='note new'>

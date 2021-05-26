@@ -26,7 +26,9 @@ function App() {
 
   const [newText, setNewText] = useState("");
 
-  const addNote = (text) => {
+  
+
+const addNote = (text) => {
     const date = new Date();
     const newNote = {
       id: nanoid(),
@@ -42,12 +44,40 @@ function App() {
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
   };
-  const updateNote = (id) => {
-    const allItems = [...notes];
-    const itemIndex = allItems.findIndex((item) => item.id === id);
-    allItems[itemIndex].text = newText;
-    setNotes(allItems);
+
+
+  // const updateNote = (id,updtedTask) => {
+    
+  //   const allItems = [...notes];
+  //   console.log(allItems.text,"text")
+  //   const itemIndex = allItems.findIndex((item) => item.id === id);
+    
+  //   allItems[itemIndex].text = newText;
+  //   console.log(allItems,"items")
+  //   setNotes(allItems);
+  // };
+
+  const submitEdits = (event, idToEdit) => {
+    const date = new Date();
+    event.preventDefault();
+
+    const updatedNotes = notes.map((note) => {
+      if (note.id === idToEdit) {
+        return {
+          id: note.id,
+          text: event.target.note.value,
+          date: date.toLocaleDateString(),
+          fav:note.fav
+        };
+      } else {
+        return note;
+      }
+    });
+    setNotes(updatedNotes);
+    //setNoteEditing("");
   };
+
+
   const addToFavorites = (id) => {
     console.log("id prop", id);
     const allItems = [...notes];
@@ -57,8 +87,9 @@ function App() {
     console.log("itemIndex", itemIndex);
   };
 
-	// const [characters, updateCharacters] = useState(notes);
-// console.log(text,id,"notes")
+
+
+
 function handleOnDragEnd(result) {
 	
 	if (!result.destination) return;
@@ -66,6 +97,7 @@ function handleOnDragEnd(result) {
 	const [reorderedItem] = items.splice(result.source.index, 1);
 	items.splice(result.destination.index, 0, reorderedItem);
 	console.log(result.destination,"destination")
+  
 	setNotes(items);
 }
 
@@ -77,10 +109,13 @@ function handleOnDragEnd(result) {
 				<div className="container" {...provided.droppableProps} ref={provided.innerRef}>
         <NotesList
           notes={notes}
+          newText={newText}
           handleAddNote={addNote}
           handleDeleteNote={deleteNote}
-          handleUpdateNote={updateNote}
+         
           addToFavorites={addToFavorites}
+          setNotes={setNotes}
+          submitEdits={submitEdits}
         />
          {provided.placeholder}
       </div>
