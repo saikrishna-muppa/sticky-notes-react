@@ -31,8 +31,6 @@ function App() {
     const newNote = {
       id: nanoid(),
       text: text,
-      // item:"",
-      // editItem:false,
       fav: false,
       date: date.toLocaleDateString(),
     };
@@ -42,7 +40,6 @@ function App() {
 
   const deleteNote = (id) => {
     const newNotes = notes.filter((note) => note.id !== id);
-    // console.log(newNotes,"delete")
     setNotes(newNotes);
   };
   const updateNote = (id) => {
@@ -53,7 +50,6 @@ function App() {
   };
   const addToFavorites = (id) => {
     console.log("id prop", id);
-
     const allItems = [...notes];
     const itemIndex = allItems.findIndex((item) => item.id === id);
     allItems[itemIndex].fav = !allItems[itemIndex].fav;
@@ -65,7 +61,6 @@ function App() {
     <div className="container">
       <NotesList
         notes={notes}
-      
         handleAddNote={addNote}
         handleDeleteNote={deleteNote}
         handleUpdateNote={updateNote}

@@ -6,7 +6,7 @@ const NotesList = ({
 	handleAddNote,
 	handleDeleteNote,
 	handleUpdateNote,
-	addToFavorites
+	addToFavorites,handleChange
 }) => {
 
 	  
@@ -26,11 +26,12 @@ const NotesList = ({
 					handleDeleteNote={handleDeleteNote}
 					handleUpdateNote={handleUpdateNote}
 					addToFavorites={addToFavorites}
+					handleChange={handleChange}
 					/>
 					
 				)
 			})}
-			<AddNote handleAddNote={handleAddNote} />
+			<AddNote handleAddNote={handleAddNote}  />
 			
 		</div>
 	);
