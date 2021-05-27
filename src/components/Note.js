@@ -28,10 +28,12 @@ const [hover, sethover] = useState(false)
 let styles = { backgroundColor: notecolor }
 
 	return (
-<div className="note-header-container"  >
+
 					<Draggable key={id}  draggableId={id} index={index} >
-				{(provided)=>( id !== noteEditing ?
-					<div className='note' ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} onMouseEnter={() => { sethover(true) }} onMouseLeave={() => { sethover(false) }}  style={styles}  >
+				{(provided, snapshot) => (id !== noteEditing ? <div ref={provided.innerRef}
+			{...provided.draggableProps}
+			{...provided.dragHandleProps} >
+					<div className='note'  onMouseEnter={() => { sethover(true) }} onMouseLeave={() => { sethover(false) }}  style={styles}  >
 				{hover && <div><select value={notecolor} onChange={(e) => { setcolor(e.target.value) }}>{COLORS.map((color) => <option value={color.code}>{color.name}</option>)}</select></div>}
 					<div className="note-text" >{text}</div>
 					<div className='note-footer'>
@@ -51,7 +53,7 @@ let styles = { backgroundColor: notecolor }
 					
 					</div>
 				
-
+</div>
 				</div>
 					:
 					<div className='note new' ref={provided.innerRef}
@@ -77,7 +79,6 @@ let styles = { backgroundColor: notecolor }
 				)}
 			</Draggable>
 			
-			</div>
 
 	);
 };
