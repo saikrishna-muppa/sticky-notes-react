@@ -33,7 +33,7 @@ let styles = { backgroundColor: notecolor }
 				{(provided)=>( id !== noteEditing ?
 					<div className='note' ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} onMouseEnter={() => { sethover(true) }} onMouseLeave={() => { sethover(false) }}  style={styles}  >
 				{hover && <div><select value={notecolor} onChange={(e) => { setcolor(e.target.value) }}>{COLORS.map((color) => <option value={color.code}>{color.name}</option>)}</select></div>}
-					<span>{text}</span>
+					<div className="note-text" >{text}</div>
 					<div className='note-footer'>
 						<small>{date}</small>
 		
@@ -47,7 +47,7 @@ let styles = { backgroundColor: notecolor }
 							size='1.3em'   />
 						
 		
-					<div>{fav ?<AiFillStar onClick={()=>addToFavorites(id,fav)} />:<AiOutlineStar onClick={()=>addToFavorites(id,fav)} />}</div>	
+					<div>{fav   ?<AiFillStar className='delete-icon' onClick={()=>addToFavorites(id,fav)} />:<AiOutlineStar className='delete-icon' onClick={()=>addToFavorites(id,fav)} />}</div>	
 					
 					</div>
 				
@@ -59,11 +59,12 @@ let styles = { backgroundColor: notecolor }
 					{...provided.dragHandleProps}>
 				<form onSubmit={(event) => { submitEdits && submitEdits(event, id); setNoteEditing("") }}>
 					<textarea
-						rows={8}
-						cols={10}
+						rows='8'
+						cols='10'
 						name="note"
 						placeholder='Type to add a note...'
 						defaultValue={text}
+						style={{width:"100%"}}
 					></textarea>
 					<div className='note-footer'>
 	

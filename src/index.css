@@ -55,7 +55,9 @@ textarea:focus {
 	background-color: #ededed;
 	cursor: pointer;
 }
-
+.note-text{
+	height:120px;overflow:auto;    overflow-wrap: anywhere;
+}
 .note {
 	background-color: #fef68a;
 	border-radius: 10px;
